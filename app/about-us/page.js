@@ -1,19 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Header from './lib/Header'; // Import the Header component
-import Footer from './lib/Footer'; // Import the Header component
-import { fetchPageData } from './lib/api';
+import { fetchPageData } from '../lib/api';
 import Slider from 'react-slick';
 import parse from 'html-react-parser';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import FeaturedPost from './lib/FeaturedPost'; // Adjust the path as necessary
+import Header from '../lib/Header'; // Import the Header component
+import Footer from '../lib/Footer'; // Import the Header component
 import Image from 'next/image';
+import FeaturedPost from '../lib/FeaturedPost'; // Adjust the path as necessary
 
 
-
-const Home = () => {
+const About = () => {
   const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchPageData('home');
+        const data = await fetchPageData('about-us');
         setContent(data);
       } catch (error) {
         setError(error.message);
@@ -84,7 +83,7 @@ const Home = () => {
                               {parse(block._multiple_text_block._description)}
                             </div>
                         )}
-                        {block._heading_two && (
+                        {block._multiple_text_block && (
                             <div className="middenSection row">
                                 <div className="textarea col-md-6">
                                     <h2>{block._multiple_text_block._heading_two}</h2>
@@ -95,7 +94,7 @@ const Home = () => {
                                 </div>
                             </div>
                         )}
-                        {block._heading_three && (
+                        {block._multiple_text_block && (
                             <div className="bottomSection">
                                 <h2>{block._multiple_text_block._heading_three}</h2>
                                 {parse(block._multiple_text_block._description_three)}
@@ -139,7 +138,7 @@ const Home = () => {
                               {block._add_testimonials.map((item, index) => (
                                 <div key={index} className="p-4">
                                   {parse(item._description)}
-                                  {item._author_image && <Image src={item._author_image.url} alt={item._author_image.alt} className="Image-fluid my-2" width={100} height={100} />}
+                                  {item._author_image && <Image src={item._author_image.url} alt={item._author_image.alt} className="Image-fluid my-2" layout="responsive" width={100} height={100} />}
                                   <span>{item._name}</span>
                                 </div>
                               ))}
@@ -169,7 +168,7 @@ const Home = () => {
                   );
                   case 'text_with_bg_image':
                     return (
-                      <section id={block._add_section_id} className="inds-train-section" key={index} style={block._bg_image ? { backgroundImage: `url(${block._bg_image.url})` } : {}}>
+                      <section id={block._add_section_id} className="textBg_section" key={index} style={block._bg_image ? { backgroundImage: `url(${block._bg_image.url})` } : {}}>
                         <div className="container">
                           <div className="mb-4 textBg_block">
                             {block._heading && (
@@ -260,7 +259,7 @@ const Home = () => {
                           <div className="row mb-4">
                             {block._service_block.map((items, index) => (
                              <div key={index} className="col-md-4 service-item">
-                                  {items._icon && <Image src={items._icon.url} alt={items._icon.alt} className="Image-fluid" width={100} height={100} />}
+                                  {items._icon && <Image src={items._icon.url} alt={items._icon.alt} className="Image-fluid" layout="responsive" width={100} height={100} />}
                                   <h2>{items._heading}</h2>
                               </div>
                             ))}
@@ -322,4 +321,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default About;

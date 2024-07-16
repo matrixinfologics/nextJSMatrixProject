@@ -1,5 +1,11 @@
 import { Inter } from "next/font/google";
+import 'bootstrap/dist/css/bootstrap.min.css';
+// app/global.css or app/home/page.js
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 import "./globals.css";
+import $ from 'jquery';
 
 const inter = Inter({ subsets: ["latin"] });
 
